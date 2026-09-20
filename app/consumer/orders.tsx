@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import {
   View,
   Text,
@@ -20,7 +20,7 @@ import {
 import { useColorScheme } from "nativewind";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
-import { useOrders, OrderStatus } from "../../context/OrderContext";
+import { useOrders, OrderStatus } from "../../stores/order.store";
 
 export default function Orders() {
   const router = useRouter();
@@ -54,7 +54,7 @@ export default function Orders() {
       case "READY_FOR_DELIVERY":
       case "PENDING_DELIVERY" as any:
         return {
-          label: "Prête pour livraison",
+          label: "PrÃªte pour livraison",
           color: "text-orange-600",
           bgColor: "bg-orange-100 dark:bg-orange-900/20",
           icon: <Package size={14} color="#EA580C" />,
@@ -197,3 +197,4 @@ export default function Orders() {
     </SafeAreaView>
   );
 }
+

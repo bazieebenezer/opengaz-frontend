@@ -1,4 +1,4 @@
-import { useFonts } from "expo-font";
+﻿import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -9,8 +9,8 @@ import { CheckCircle2, Truck, AlertTriangle } from "lucide-react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "../global.css";
 
-import { OrderProvider } from "../context/OrderContext";
-import { AuthProvider } from "../context/AuthContext";
+
+
 
 export const toastConfig = {
   success: ({ text1, text2 }: any) => (
@@ -119,8 +119,7 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AuthProvider>
-        <OrderProvider>
+      
           <StatusBar style="auto" />
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" />
@@ -130,8 +129,11 @@ export default function RootLayout() {
             <Stack.Screen name="delivery" />
           </Stack>
           <Toast config={toastConfig} topOffset={60} />
-        </OrderProvider>
-      </AuthProvider>
     </GestureHandlerRootView>
   );
 }
+
+
+
+
+

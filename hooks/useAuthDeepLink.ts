@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import { Linking } from 'react-native';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../stores/auth.store';
 import Toast from 'react-native-toast-message';
 
 export const useAuthDeepLink = () => {
@@ -10,11 +10,11 @@ export const useAuthDeepLink = () => {
     const handleDeepLink = (event: { url: string }) => {
       if (event.url.includes('auth-success')) {
         const token = event.url.split('token=')[1];
-        console.log("Token reçu via useAuthDeepLink:", token);
+        console.log("Token reÃ§u via useAuthDeepLink:", token);
         loginWithGoogleToken(token);
         Toast.show({
           type: 'customSuccess',
-          text1: 'Connexion réussie',
+          text1: 'Connexion rÃ©ussie',
           text2: 'Bienvenue sur Open Gaz !'
         });
       }
@@ -29,3 +29,4 @@ export const useAuthDeepLink = () => {
     return () => subscription.remove();
   }, [loginWithGoogleToken]);
 };
+

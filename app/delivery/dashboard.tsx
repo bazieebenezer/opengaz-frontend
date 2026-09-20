@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../stores/auth.store";
 import { orderService, Order } from "../../services/order.service";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useRouter } from "expo-router";
@@ -44,6 +44,7 @@ export default function DeliveryDashboard() {
   const isDarkMode = colorScheme === "dark";
   const [isOpen, setIsOpen] = useState(user?.isShopOpen ?? true);
   const [orders, setOrders] = useState<Order[]>([]);
+  const [myDeliveries, setMyDeliveries] = useState<Order[]>([]);
   const [rejectedIds, setRejectedIds] = useState<string[]>([]);
   const [products, setProducts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -57,6 +58,8 @@ export default function DeliveryDashboard() {
       if (showLoading) setIsLoading(true);
       const data = await orderService.getAvailableOrders();
       setOrders(data);
+      const my = await orderService.getMyDeliveryOrders();
+      setMyDeliveries(my);
     } catch (error) {
       console.error(error);
       Toast.show({
@@ -102,7 +105,7 @@ export default function DeliveryDashboard() {
         await orderService.assignOrder(orderId);
         Toast.show({
             type: "success",
-            text1: "Succès",
+            text1: "SuccÃ¨s",
             text2: "Commande acceptée !",
         });
         fetchAvailableOrders(false);
@@ -140,7 +143,9 @@ export default function DeliveryDashboard() {
   );
 
   const stats = useMemo(() => {
-    const pendingOrders = visibleOrders.length; 
+    const pendingOrders = visibleOrders.length;
+    const inProgress = myDeliveries.filter((o) => ["READY_FOR_DELIVERY", "IN_DELIVERY"].includes(o.status)).length;
+    const deliveredCount = myDeliveries.filter((o) => ["DELIVERED", "COMPLETED"].includes(o.status)).length; 
     return [
         { 
           id: "1", 
@@ -153,7 +158,7 @@ export default function DeliveryDashboard() {
         { 
             id: "2", 
             label: "En cours", 
-            value: "00", 
+            value: inProgress < 10 ? `0${inProgress}` : `${inProgress}`, 
             icon: Clock, 
             color: "#F59E0B", 
             bgColor: "bg-amber-500/10" 
@@ -161,13 +166,13 @@ export default function DeliveryDashboard() {
         { 
             id: "3", 
             label: "Livrés", 
-            value: "00", 
+            value: deliveredCount < 10 ? `0${deliveredCount}` : `${deliveredCount}`, 
             icon: CheckCircle, 
             color: "#10B981", 
             bgColor: "bg-emerald-500/10" 
         },
       ];
-  }, [visibleOrders]);
+  }, [visibleOrders, myDeliveries]);
 
   if (isLoading && !isRefreshing) {
     return (
@@ -199,7 +204,7 @@ export default function DeliveryDashboard() {
                     <Truck size={28} color="#00A3E0" />
                 </View>
                 <View>
-                  <Text className="text-gray-400 dark:text-gray-500 font-medium">Bonjour 👋</Text>
+                  <Text className="text-gray-400 dark:text-gray-500 font-medium">Bonjour</Text>
                   <Text className="text-2xl font-black text-gray-900 dark:text-white" numberOfLines={1}>
                     {user?.name || "Livreur"}
                   </Text>
@@ -279,7 +284,7 @@ export default function DeliveryDashboard() {
                                 {order.items.map((item) => (
                                     <View key={item.id} className="flex-row justify-between items-center py-1.5">
                                         <Text className="text-gray-700 dark:text-gray-300 font-medium flex-1 mr-2">
-                                            {item.quantity} × {item.product.category.brand} {item.product.category.weight}kg
+                                            {item.quantity} Ã— {item.product.category.brand} {item.product.category.weight}kg
                                         </Text>
                                         <Text className="text-gray-900 dark:text-white font-bold">
                                             {(item.price * item.quantity).toLocaleString('fr-FR')} F

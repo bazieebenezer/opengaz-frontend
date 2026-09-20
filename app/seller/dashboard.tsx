@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useCallback, useEffect } from "react";
+﻿import React, { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -30,8 +30,8 @@ import Animated, { FadeInDown, FadeInRight, ZoomIn } from "react-native-reanimat
 import { useRouter } from "expo-router";
 import BottomSheet, { BottomSheetScrollView, BottomSheetView, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useOrders } from "../../context/OrderContext";
-import { useAuth } from "../../context/AuthContext";
+import { useOrders } from "../../stores/order.store";
+import { useAuth } from "../../stores/auth.store";
 import { authService } from "../../services/auth.service";
 import { productService, Product } from "../../services/product.service";
 import Toast from "react-native-toast-message";
@@ -92,7 +92,7 @@ export default function SellerDashboard() {
       const response = await authService.updateShopStatus(value);
       console.log("[DEBUG] Réponse du serveur:", response);
     } catch (error: any) {
-      console.error("[DEBUG] Erreur complète handleToggleShop:", {
+      console.error("[DEBUG] Erreur complÃ¨te handleToggleShop:", {
         message: error.message,
         status: error.response?.status,
         data: error.response?.data,
@@ -120,7 +120,7 @@ export default function SellerDashboard() {
       Toast.show({
         type: "customError",
         text1: "Erreur",
-        text2: "Mise à jour du stock échouée.",
+        text2: "Mise Ã  jour du stock échouée.",
       });
     }
   };
@@ -156,7 +156,7 @@ export default function SellerDashboard() {
       },
       { 
         id: "2", 
-        label: "À traiter", 
+        label: "Ã€ traiter", 
         value: pendingOrders < 10 ? `0${pendingOrders}` : `${pendingOrders}`, 
         icon: Clock, 
         color: "#00A3E0", 
@@ -242,7 +242,7 @@ export default function SellerDashboard() {
                   )}
                 </View>
                 <View>
-                  <Text className="text-gray-400 dark:text-gray-500 font-medium">Bonjour 👋</Text>
+                  <Text className="text-gray-400 dark:text-gray-500 font-medium">Bonjour ðŸ‘‹</Text>
                   <Text className="text-2xl font-black text-gray-900 dark:text-white" numberOfLines={1}>
                     {user?.shopName || user?.name || "Boutique"}
                   </Text>
@@ -267,7 +267,7 @@ export default function SellerDashboard() {
                     {isOpen ? "Boutique Ouverte" : "Boutique Fermée"}
                   </Text>
                   <Text className="text-gray-500 dark:text-gray-400 text-[13px] mt-0.5" numberOfLines={1}>
-                    {isOpen ? "Prêt à recevoir des commandes" : "Inactif pour les clients"}
+                    {isOpen ? "PrÃªt Ã  recevoir des commandes" : "Inactif pour les clients"}
                   </Text>
                 </View>
               </View>
@@ -441,7 +441,7 @@ export default function SellerDashboard() {
                             order.status === 'PENDING' ? 'text-red-500' : 
                             order.status === 'CANCELLED' ? 'text-gray-400' : 'text-blue-500'
                           }`}>
-                            {order.status === 'PENDING' ? 'À valider' : 
+                            {order.status === 'PENDING' ? 'Ã€ valider' : 
                              (order.status as any) === 'VALIDATED' ? 'Validé' :
                              order.status === 'PREPARING' ? 'En préparation' :
                              (order.status as any) === 'SHIPPED' ? 'En livraison' :
@@ -519,7 +519,7 @@ export default function SellerDashboard() {
                 </Animated.View>
                 <Text className="text-[18px] font-bold text-gray-900 dark:text-white text-center mb-2">Aucune notification</Text>
                 <Text className="text-gray-500 dark:text-gray-400 text-center text-[16px]">
-                  Vous êtes à jour ! Toutes les nouvelles alertes apparaîtront ici.
+                  Vous Ãªtes Ã  jour ! Toutes les nouvelles alertes apparaÃ®tront ici.
                 </Text>
               </View>
             )}
@@ -538,7 +538,7 @@ export default function SellerDashboard() {
                 Vente au comptoir
               </Text>
               <Text className="text-gray-500 dark:text-gray-400 text-center text-[14px] mb-8">
-                Renseignez le modèle de bouteille vendu physiquement.
+                Renseignez le modÃ¨le de bouteille vendu physiquement.
               </Text>
               
               <ScrollView className="max-h-96 w-full mb-6" showsVerticalScrollIndicator={false}>
@@ -567,7 +567,7 @@ export default function SellerDashboard() {
                               <Text className="text-gray-400 text-[13px]">{product.category.price.toLocaleString('fr-FR')} F</Text>
                             </View>
                           </View>
-                          <Text className="font-black text-secondary text-[14px]">{isSelected ? 'SÉLECTIONNÉ' : 'CHOISIR'}</Text>
+                          <Text className="font-black text-secondary text-[14px]">{isSelected ? 'SÃ‰LECTIONNÃ‰' : 'CHOISIR'}</Text>
                         </TouchableOpacity>
                         
                         {isSelected && (
@@ -610,7 +610,7 @@ export default function SellerDashboard() {
                 const total = products.reduce((acc, p) => acc + (p.category.price * (selectedItems[p.id] || 0)), 0);
                 return (
                   <View className="flex-row justify-between items-center w-full mb-8">
-                    <Text className="text-gray-500 dark:text-gray-400 font-bold text-[14px]">Total à encaisser</Text>
+                    <Text className="text-gray-500 dark:text-gray-400 font-bold text-[14px]">Total Ã  encaisser</Text>
                     <Text className="text-primary font-black text-2xl">{total.toLocaleString("fr-FR")} F</Text>
                   </View>
                 );
@@ -638,7 +638,7 @@ export default function SellerDashboard() {
                       Toast.show({
                         type: "customSuccess",
                         text1: "Vente enregistrée !",
-                        text2: `La caisse et les stocks ont été mis à jour.`,
+                        text2: `La caisse et les stocks ont été mis Ã  jour.`,
                       });
                     }
                   }}
@@ -666,7 +666,7 @@ export default function SellerDashboard() {
           <View className="flex-1 justify-center items-center bg-black/60 px-6">
             <View className="bg-white dark:bg-gray-800 w-full rounded-xl p-6 items-center border border-gray-100 dark:border-gray-800">
               <Text className="text-2xl font-bold text-gray-900 dark:text-white mb-2 text-center">
-                Mise à jour inventaire
+                Mise Ã  jour inventaire
               </Text>
               <Text className="text-gray-500 dark:text-gray-400 text-center text-[14px] mb-8">
                 Ajustez le nombre exact de bouteilles pleines disponibles.
@@ -709,7 +709,7 @@ export default function SellerDashboard() {
                     Toast.show({
                       type: "customSuccess",
                       text1: "Inventaire synchronisé",
-                      text2: "Vos stocks sont à jour pour les clients.",
+                      text2: "Vos stocks sont Ã  jour pour les clients.",
                     });
                   }}
                   className="bg-primary w-full py-6 rounded-xl items-center justify-center"
@@ -724,3 +724,4 @@ export default function SellerDashboard() {
     </GestureHandlerRootView>
   );
 }
+
