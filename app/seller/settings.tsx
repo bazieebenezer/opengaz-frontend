@@ -1,4 +1,4 @@
-import {
+﻿import {
   ChevronRight,
   FileText,
   Info,
@@ -39,8 +39,8 @@ import { Image } from "expo-image";
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import { useColorScheme } from "nativewind";
-import { useOrders } from "../../context/OrderContext";
-import { useAuth } from "../../context/AuthContext";
+import { useOrders } from "../../stores/order.store";
+import { useAuth } from "../../stores/auth.store";
 import { authService } from "../../services/auth.service";
 import { orderService } from "../../services/order.service";
 import Toast from "react-native-toast-message";
@@ -125,7 +125,7 @@ export default function SellerSettings() {
         
         Toast.show({
           type: 'info',
-          text1: 'Mise à jour...',
+          text1: 'Mise Ã  jour...',
           text2: 'Envoi de votre nouvelle photo en cours.'
         });
 
@@ -134,8 +134,8 @@ export default function SellerSettings() {
 
         Toast.show({
           type: 'success',
-          text1: 'Succès',
-          text2: 'Photo de boutique mise à jour !'
+          text1: 'SuccÃ¨s',
+          text2: 'Photo de boutique mise Ã  jour !'
         });
       }
     } catch (error) {
@@ -143,7 +143,7 @@ export default function SellerSettings() {
       Toast.show({
         type: 'customError',
         text1: 'Erreur',
-        text2: 'Impossible de mettre à jour la photo.'
+        text2: 'Impossible de mettre Ã  jour la photo.'
       });
     }
   };
@@ -156,7 +156,7 @@ export default function SellerSettings() {
         Toast.show({
           type: 'error',
           text1: 'Permission refusée',
-          text2: 'L\'accès à la position est nécessaire.'
+          text2: 'L\'accÃ¨s Ã  la position est nécessaire.'
         });
         return;
       }
@@ -190,7 +190,7 @@ export default function SellerSettings() {
       Toast.show({
         type: 'success',
         text1: 'Position récupérée',
-        text2: 'Votre adresse a été mise à jour automatiquement.'
+        text2: 'Votre adresse a été mise Ã  jour automatiquement.'
       });
     } catch (error) {
       console.error("Location error:", error);
@@ -225,7 +225,7 @@ export default function SellerSettings() {
       
       Toast.show({
         type: 'success',
-        text1: 'Profil mis à jour',
+        text1: 'Profil mis Ã  jour',
         text2: 'Vos informations ont été enregistrées.'
       });
     } catch (error) {
@@ -233,7 +233,7 @@ export default function SellerSettings() {
       Toast.show({
         type: 'error',
         text1: 'Erreur',
-        text2: 'Impossible de mettre à jour le profil.'
+        text2: 'Impossible de mettre Ã  jour le profil.'
       });
     } finally {
       setIsSubmitting(false);
@@ -254,7 +254,7 @@ export default function SellerSettings() {
             Toast.show({
               type: 'customSuccess',
               text1: 'Déconnecté',
-              text2: 'À bientôt sur OpenGaz !'
+              text2: 'Ã€ bientÃ´t sur OpenGaz !'
             });
           }
         }
@@ -276,7 +276,7 @@ export default function SellerSettings() {
               await orderService.clearSellerHistory();
               Toast.show({
                 type: 'success',
-                text1: 'Succès',
+                text1: 'SuccÃ¨s',
                 text2: "L'historique des réservations a été réinitialisé."
               });
             } catch (error) {
@@ -337,7 +337,7 @@ export default function SellerSettings() {
         >
           <Animated.View entering={FadeInDown.springify()} className="mb-12 mt-6">
             <Text className="font-black text-axiforma text-4xl text-primary text-center mb-2">
-              Paramètres
+              ParamÃ¨tres
             </Text>
             <Text className="font-regular text-xl text-gray-500 dark:text-gray-400 mb-10 text-center">
               Gérez votre compte et vos préférences
@@ -571,36 +571,36 @@ export default function SellerSettings() {
               <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
                 <Text className="font-black text-xl text-gray-800 dark:text-gray-100 mb-2">1. Objet du service</Text>
                 <Text className="text-gray-600 text-[16px] 0 dark:text-gray-400 mb-6 leading-6">
-                  OPEN GAZ est une plateforme de mise en relation permettant la commande et la livraison de bouteilles de gaz à domicile. En utilisant cette application, vous acceptez les présentes conditions.
+                  OPEN GAZ est une plateforme de mise en relation permettant la commande et la livraison de bouteilles de gaz Ã  domicile. En utilisant cette application, vous acceptez les présentes conditions.
                 </Text>
 
                 <Text className="font-black text-xl text-gray-800 dark:text-gray-100 mb-2">2. Inscription et compte</Text>
                 <Text className="text-gray-600 text-[16px] 0 dark:text-gray-400 mb-6 leading-6">
-                  L'utilisateur s'engage à fournir des informations exactes lors de son inscription. Le compte est personnel et l'utilisateur est responsable de la confidentialité de ses identifiants.
+                  L'utilisateur s'engage Ã  fournir des informations exactes lors de son inscription. Le compte est personnel et l'utilisateur est responsable de la confidentialité de ses identifiants.
                 </Text>
 
                 <Text className="font-black text-xl text-gray-800 dark:text-gray-100 mb-2">3. Commandes et livraison</Text>
                 <Text className="text-gray-600 text-[16px] dark:text-gray-400 mb-6 leading-6">
-                  Les commandes sont traitées dès validation. Les délais de livraison sont donnés à titre indicatif. L'utilisateur doit être présent pour réceptionner la commande et remettre la bouteille vide correspondante si nécessaire.
+                  Les commandes sont traitées dÃ¨s validation. Les délais de livraison sont donnés Ã  titre indicatif. L'utilisateur doit Ãªtre présent pour réceptionner la commande et remettre la bouteille vide correspondante si nécessaire.
                 </Text>
 
                 <Text className="font-black text-xl text-gray-800 dark:text-gray-100 mb-2">4. Prix et paiement</Text>
                 <Text className="text-gray-600 text-[16px] dark:text-gray-400 mb-6 leading-6">
-                  Les prix affichés incluent la recharge de gaz et les frais de livraison. Le paiement s'effectue via les moyens de paiement intégrés à l'application ou à la livraison selon les options disponibles.
+                  Les prix affichés incluent la recharge de gaz et les frais de livraison. Le paiement s'effectue via les moyens de paiement intégrés Ã  l'application ou Ã  la livraison selon les options disponibles.
                 </Text>
 
                 <Text className="font-black text-xl text-gray-800 dark:text-gray-100 mb-2">5. Sécurité</Text>
                 <Text className="text-gray-600 text-[16px] dark:text-gray-400 mb-6 leading-6">
-                  Le gaz est un produit inflammable. L'utilisateur s'engage à manipuler les bouteilles avec précaution et à respecter les consignes de sécurité en vigueur. OPEN GAZ ne saurait être tenu responsable d'une mauvaise manipulation.
+                  Le gaz est un produit inflammable. L'utilisateur s'engage Ã  manipuler les bouteilles avec précaution et Ã  respecter les consignes de sécurité en vigueur. OPEN GAZ ne saurait Ãªtre tenu responsable d'une mauvaise manipulation.
                 </Text>
 
                 <Text className="font-black text-xl text-gray-800 dark:text-gray-100 mb-2">6. Données personnelles</Text>
                 <Text className="text-gray-600 text-[16px] dark:text-gray-400 mb-6 leading-6">
-                  Vos données sont collectées uniquement pour le bon fonctionnement du service de livraison. Conformément à la loi, vous disposez d'un droit d'accès et de rectification de vos données.
+                  Vos données sont collectées uniquement pour le bon fonctionnement du service de livraison. Conformément Ã  la loi, vous disposez d'un droit d'accÃ¨s et de rectification de vos données.
                 </Text>
 
                 <Text className="text-gray-400 text-2sm text-center mt-4 mb-8">
-                  Dernière mise à jour : 24 Mai 2026
+                  DerniÃ¨re mise Ã  jour : 24 Mai 2026
                 </Text>
               </ScrollView>
 
@@ -652,7 +652,7 @@ export default function SellerSettings() {
                 </View>
                 <Text className="text-gray-800 dark:text-white font-bold px-2 text-2xl mb-2">Aorte Inc.</Text>
                 <Text className="text-gray-500 dark:text-gray-400 leading-6 px-2 text-[16px]">
-                  Nous sommes une entreprise technologique panafricaine basée au Burkina Faso dédiée à la simplification du quotidien à travers des solutions numériques innovantes.
+                  Nous sommes une entreprise technologique panafricaine basée au Burkina Faso dédiée Ã  la simplification du quotidien Ã  travers des solutions numériques innovantes.
                 </Text>
               </View>
 
@@ -746,7 +746,7 @@ export default function SellerSettings() {
                       {isDarkMode ? <Moon size={24} color="#00A3E0" /> : <Sun size={24} color="#00A3E0" />}
                     </View>
                     <View>
-                      <Text className="text-gray-800 dark:text-gray-100 font-bold text-xl">Thème</Text>
+                      <Text className="text-gray-800 dark:text-gray-100 font-bold text-xl">ThÃ¨me</Text>
                       <Text className="text-gray-400 dark:text-gray-500 text-2xs">Changer l'apparence</Text>
                     </View>
                   </View>
@@ -765,7 +765,7 @@ export default function SellerSettings() {
                     </View>
                     <View>
                       <Text className="text-gray-800 dark:text-gray-100 font-bold text-xl">Notifications</Text>
-                      <Text className="text-gray-400 dark:text-gray-500 text-2xs">Bientôt disponible</Text>
+                      <Text className="text-gray-400 dark:text-gray-500 text-2xs">BientÃ´t disponible</Text>
                     </View>
                   </View>
                   <Switch disabled value={true} />
@@ -786,3 +786,4 @@ export default function SellerSettings() {
     </SafeAreaView>
   );
 }
+

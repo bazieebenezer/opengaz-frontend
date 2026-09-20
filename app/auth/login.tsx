@@ -1,4 +1,4 @@
-import * as Linking from "expo-linking";
+﻿import * as Linking from "expo-linking";
 import { Link, router } from "expo-router";
 import { ArrowRight, Lock, Mail } from "lucide-react-native";
 import React, { useRef, useState, useEffect } from "react";
@@ -27,7 +27,7 @@ import Toast from "react-native-toast-message";
 import "../../global.css";
 import CustomInput from "../../components/custom-input";
 import { loginSchema } from "../../utils/validation";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../stores/auth.store";
 import { useAuthDeepLink } from "../../hooks/useAuthDeepLink";
 
 type FormDataType = {
@@ -266,3 +266,4 @@ export default function ConsumerLogin() {
     </SafeAreaView>
   );
 }
+

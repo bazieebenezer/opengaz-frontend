@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import {
   View,
   Text,
@@ -22,7 +22,7 @@ import {
 import { useColorScheme } from "nativewind";
 import Toast from "react-native-toast-message";
 import Animated, { FadeInDown, FadeIn, FadeOut } from "react-native-reanimated";
-import { useOrders } from "../../context/OrderContext";
+import { useOrders } from "../../stores/order.store";
 import { orderService } from "../../services/order.service";
 
 const defaultProfileImage = require("../../assets/images/user-profile.jpg");
@@ -94,7 +94,7 @@ export default function OrderDetails() {
       console.error("Error confirming order:", error);
       Toast.show({
         type: "customError",
-        text1: "Échec de la commande",
+        text1: "Ã‰chec de la commande",
         text2: error.message || "Impossible de confirmer la commande.",
       });
     }
@@ -238,7 +238,7 @@ export default function OrderDetails() {
             </View>
             <View className="flex-1">
               <Text className="text-[18px] font-bold text-gray-900 dark:text-white">
-                Paiement à la livraison
+                Paiement Ã  la livraison
               </Text>
               <Text className="text-emerald-600 text-[14px] font-medium">
                 Prévoyez l'appoint si possible
@@ -297,7 +297,7 @@ export default function OrderDetails() {
           </View>
           <View className="h-[1px] bg-white/10 mb-6" />
           <View className="flex-row justify-between items-center">
-            <Text className="text-white text-xl font-bold">Total à payer</Text>
+            <Text className="text-white text-xl font-bold">Total Ã  payer</Text>
             <Text className="text-primary text-3xl font-black">
               {(total + deliveryFee).toLocaleString('fr-FR')} F
             </Text>
@@ -342,7 +342,7 @@ export default function OrderDetails() {
             {isConfirming ? (
               <ActivityIndicator color="white" />
             ) : (
-              <Text className="text-white text-xl font-bold ml-2">Commander à nouveau</Text>
+              <Text className="text-white text-xl font-bold ml-2">Commander Ã  nouveau</Text>
             )}
           </TouchableOpacity>
         </Animated.View>
@@ -350,3 +350,4 @@ export default function OrderDetails() {
     </SafeAreaView>
   );
 }
+
