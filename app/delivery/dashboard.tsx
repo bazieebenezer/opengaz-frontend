@@ -105,7 +105,7 @@ export default function DeliveryDashboard() {
         await orderService.assignOrder(orderId);
         Toast.show({
             type: "success",
-            text1: "SuccÃ¨s",
+            text1: "Succès",
             text2: "Commande acceptée !",
         });
         fetchAvailableOrders(false);
@@ -284,7 +284,7 @@ export default function DeliveryDashboard() {
                                 {order.items.map((item) => (
                                     <View key={item.id} className="flex-row justify-between items-center py-1.5">
                                         <Text className="text-gray-700 dark:text-gray-300 font-medium flex-1 mr-2">
-                                            {item.quantity} Ã— {item.product.category.brand} {item.product.category.weight}kg
+                                            {item.quantity} × {item.product.category.brand} {item.product.category.weight}kg
                                         </Text>
                                         <Text className="text-gray-900 dark:text-white font-bold">
                                             {(item.price * item.quantity).toLocaleString('fr-FR')} F

@@ -419,7 +419,7 @@ export default function ConsumerHome() {
                     Localisation désactivée
                   </Text>
                   <Text className="text-gray-500 dark:text-gray-400 text-center mb-6 text-[15px] leading-5 max-w-[260px]">
-                    Autorisez l'accÃ¨s Ã  votre position dans les réglages pour voir les revendeurs proches.
+                    Autorisez l'accès à votre position dans les réglages pour voir les revendeurs proches.
                   </Text>
                   <TouchableOpacity 
                     onPress={() => {
@@ -470,7 +470,7 @@ export default function ConsumerHome() {
           </View>
         </ScrollView>
 
-        {/* Boutique sélectionnée â€“ Modale glissante */}
+        {/* Boutique sélectionnée – Modale glissante */}
         <Modal
           visible={!!selectedSeller}
           transparent
@@ -543,7 +543,7 @@ export default function ConsumerHome() {
                       <View className="w-10 h-10 bg-primary/10 rounded-full items-center justify-center mr-2">
                         <Info size={24} color="#00A3E0" />
                       </View>
-                      <Text className="text-primary font-black uppercase tracking-wider text-[16px]">Ã€ propos</Text>
+                      <Text className="text-primary font-black uppercase tracking-wider text-[16px]">À propos</Text>
                     </View>
                     <Text className="text-gray-600 dark:text-gray-400 text-[16px] leading-7">
                       {selectedSeller.description || "Aucune description fournie par ce vendeur."}
@@ -555,7 +555,7 @@ export default function ConsumerHome() {
                     <Animated.View entering={FadeInDown.delay(400).springify()} className="flex-row items-center justify-between mb-6">
                       <Text className="text-2xl font-black text-gray-900 dark:text-white">Bouteilles disponibles</Text>
                       <View className="bg-gray-100 dark:bg-white/10 px-3 py-1 rounded-full">
-                        <Text className="text-gray-500 dark:text-gray-400 font-bold text-[12px]">{filteredBottles.length} modÃ¨les</Text>
+                        <Text className="text-gray-500 dark:text-gray-400 font-bold text-[12px]">{filteredBottles.length} modèles</Text>
                       </View>
                     </Animated.View>
 
@@ -601,7 +601,7 @@ export default function ConsumerHome() {
                                 ) : (
                                   <View className="bg-red-500/10 px-2 py-1 rounded-lg flex-row items-center">
                                     <AlertCircle size={14} color="#EF4444" />
-                                    <Text className="text-red-600 dark:text-red-400 text-[12px] font-bold ml-1">Ã‰puisé</Text>
+                                    <Text className="text-red-600 dark:text-red-400 text-[12px] font-bold ml-1">Épuisé</Text>
                                   </View>
                                 )}
                                 <View className="flex-row items-center bg-gray-100 dark:bg-white/10 rounded-xl p-1 border border-gray-100 dark:border-white/5">
@@ -638,7 +638,7 @@ export default function ConsumerHome() {
                         <View className="py-10 items-center">
                           <Info size={40} color="#00A3E0" />
                           <Text className="text-gray-500 text-center mt-4">
-                            Ce vendeur n'a pas encore ajouté de produits Ã  son inventaire.
+                            Ce vendeur n'a pas encore ajouté de produits à son inventaire.
                           </Text>
                         </View>
                       )}

@@ -51,9 +51,9 @@ const { width, height } = Dimensions.get("window");
 const userPlaceholder = require("../../assets/images/user-profile.jpg");
 
 const TIMELINE_STEPS_BASE = [
-  { id: "PENDING", label: "Commande reÃ§ue", time: "Ã€ l'instant" },
+  { id: "PENDING", label: "Commande reçue", time: "À l'instant" },
   { id: "PREPARING", label: "Préparation", time: "En cours" },
-  { id: "READY_FOR_DELIVERY", label: "PrÃªte pour livraison", time: "En attente" },
+  { id: "READY_FOR_DELIVERY", label: "Prête pour livraison", time: "En attente" },
   { id: "IN_DELIVERY", label: "En cours de livraison", time: "En route" },
   { id: "DELIVERED", label: "Livré", time: "Vérification" },
   { id: "COMPLETED", label: "Terminée", time: "Terminé" },
@@ -219,7 +219,7 @@ export default function Tracking() {
               <View className="bg-white/95 dark:bg-gray-800/95 px-5 py-2.5 rounded-xl border border-white/20 flex-row items-center">
                 <View className="w-2 h-2 bg-emerald-500 rounded-full mr-2" />
                 <Text className="text-gray-900 dark:text-white font-bold tracking-tight">
-                  Suivi Commande â€¢ #{orderId.slice(-6).toUpperCase()}
+                  Suivi Commande • #{orderId.slice(-6).toUpperCase()}
                 </Text>
               </View>
 
@@ -317,7 +317,7 @@ export default function Tracking() {
                       <View className="flex-row items-center mt-1">
                         <Clock size={14} color="#00A3E0" />
                         <Text className="text-primary font-bold ml-1 text-[13px]">
-                          {currentOrder?.status === "DELIVERED" ? "Arrivé âœ“" : "En route"}
+                          {currentOrder?.status === "DELIVERED" ? "Arrivé ✓" : "En route"}
                         </Text>
                       </View>
                     </View>
@@ -352,11 +352,11 @@ export default function Tracking() {
               <Text className="text-[18px] font-black text-gray-900 dark:text-white">
                 {currentOrder?.status === "PENDING" && "En attente de validation..."}
                 {currentOrder?.status === "PREPARING" && "Préparation en cours..."}
-                {currentOrder?.status === "READY_FOR_DELIVERY" && "PrÃªte pour livraison"}
+                {currentOrder?.status === "READY_FOR_DELIVERY" && "Prête pour livraison"}
                 {currentOrder?.status === "IN_DELIVERY" && "En cours de livraison"}
                 {currentOrder?.status === "DELIVERED" && "Livraison effectuée"}
                 {currentOrder?.status === "COMPLETED" && "Commande terminée"}
-                {!currentOrder?.status && "â€”"}
+                {!currentOrder?.status && "—"}
               </Text>
             </Animated.View>
 
@@ -399,7 +399,7 @@ export default function Tracking() {
               <View className="flex-1 ml-4">
                 <Text className="text-[15px] font-bold text-gray-900 dark:text-white">Détails de la commande</Text>
                 <Text className="text-gray-400 text-sm">
-                  {(currentOrder?.items || []).reduce((acc: any, item: any) => acc + (item.quantity || 0), 0)} article{(currentOrder?.items || []).reduce((acc: any, item: any) => acc + (item.quantity || 0), 0) > 1 ? 's' : ''} â€¢ {(currentOrder?.totalPrice || 0).toLocaleString('fr-FR')} F
+                  {(currentOrder?.items || []).reduce((acc: any, item: any) => acc + (item.quantity || 0), 0)} article{(currentOrder?.items || []).reduce((acc: any, item: any) => acc + (item.quantity || 0), 0) > 1 ? 's' : ''} • {(currentOrder?.totalPrice || 0).toLocaleString('fr-FR')} F
                 </Text>
               </View>
             </Animated.View>
@@ -444,7 +444,7 @@ export default function Tracking() {
                 <View className="w-20 h-20 bg-white/20 rounded-full items-center justify-center mb-4">
                    <ShieldCheck size={48} color="white" />
                 </View>
-                <Text className="text-white text-2xl font-black text-center">Garantie gaz sÃ»r</Text>
+                <Text className="text-white text-2xl font-black text-center">Garantie gaz sûr</Text>
                 <Text className="text-white/80 text-center font-medium mt-1">Votre sécurité est notre priorité</Text>
               </View>
 
@@ -465,7 +465,7 @@ export default function Tracking() {
                     </View>
                     <View className="flex-1">
                        <Text className="text-gray-900 dark:text-white font-bold text-lg">Qualité garanti</Text>
-                       <Text className="text-gray-500 dark:text-gray-400 text-sm leading-5">Chaque bouteille est vérifiée au dépÃ´t pour vous garantir la quantité exacte payée.</Text>
+                       <Text className="text-gray-500 dark:text-gray-400 text-sm leading-5">Chaque bouteille est vérifiée au dépôt pour vous garantir la quantité exacte payée.</Text>
                     </View>
                   </View>
                   <View className="flex-row items-start">
@@ -536,11 +536,11 @@ export default function Tracking() {
               <View className="h-6 justify-center mb-8">
                 {rating > 0 && (
                   <Text className="text-secondary font-extrabold text-[15px]">
-                    {rating === 1 && "TrÃ¨s insatisfaisant ðŸ˜ž"}
-                    {rating === 2 && "Insatisfaisant ðŸ˜"}
-                    {rating === 3 && "Moyen ðŸ™‚"}
-                    {rating === 4 && "TrÃ¨s bien ! ðŸ˜Š"}
-                    {rating === 5 && "Excellent ! ðŸ¤©"}
+                    {rating === 1 && "Très insatisfaisant 😞"}
+                    {rating === 2 && "Insatisfaisant 😐"}
+                    {rating === 3 && "Moyen 🙂"}
+                    {rating === 4 && "Très bien ! 😊"}
+                    {rating === 5 && "Excellent ! 🤩"}
                   </Text>
                 )}
               </View>

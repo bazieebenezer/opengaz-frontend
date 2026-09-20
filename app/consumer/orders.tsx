@@ -54,7 +54,7 @@ export default function Orders() {
       case "READY_FOR_DELIVERY":
       case "PENDING_DELIVERY" as any:
         return {
-          label: "PrÃªte pour livraison",
+          label: "Prête pour livraison",
           color: "text-orange-600",
           bgColor: "bg-orange-100 dark:bg-orange-900/20",
           icon: <Package size={14} color="#EA580C" />,
